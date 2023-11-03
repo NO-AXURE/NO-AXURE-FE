@@ -3,7 +3,7 @@
     <h2 class="title" @click="toAll()">전체 랭킹 ></h2>
     <div class="img-container">
         <div class="img-box" :key="item" v-for="(item) in data">
-            <img :src="(`@/assets/${item.no}.jpeg`)" @click="toDetail()"/>
+            <img :src="`/assets/${item.no}.jpeg`" @click="toDetail()"/>
             <p>{{item.title}}</p>
             <div class="overlay" @click="toDetail()">
                 <div class="detail">영화 요약정보</div>

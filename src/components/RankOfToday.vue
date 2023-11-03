@@ -1,13 +1,12 @@
 <template>
   <div class="container">
     <div>
-      <!-- caruosel 필요 -->
       <h2 class="title" @click="toToday()">오늘의 랭킹 ></h2>
       <carousel :items-to-show="3" :autoplay="3000">
         <slide class="slide" v-for="item in data" :key="item">
           <div class="img-box">
             <h3 class="img-no">{{ item.no }}. {{ item.title }}</h3>
-            <img @click="toDetail()" :src="(`@/assets/${item.no}.jpeg`)"/>
+            <img @click="toDetail()" :src="`/assets/${item.no}.jpeg`"/>
             <div class="overlay" @click="toDetail()">
               <div class="detail">영화 요약정보</div>
             </div>
@@ -24,6 +23,7 @@
 
 <script setup>
 import 'vue3-carousel/dist/carousel.css'
+import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
 import { useRouter } from "vue-router";
 import { reactive,toRefs } from 'vue';
 
