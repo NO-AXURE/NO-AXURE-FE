@@ -4,7 +4,8 @@
   <div class="handle">
     <h2 v-if="store.state.authToken == ''" class="join" @click="store.state.JoinPopState = true">회원가입</h2>
     <h2 v-if="store.state.authToken == ''" class="login" @click="store.state.LoginPopState = true">로그인</h2>
-    <h2 v-if="store.state.authToken != ''" class="login" @click="store.state.LoginPopState = true">로그아웃</h2>
+    <h2 v-if="store.state.authToken != ''" class="edit" @click="store.state.EditPopState = true">회원정보 수정</h2>
+    <h2 v-if="store.state.authToken != ''" class="logout" @click="store.state.authToken = ''">로그아웃</h2>
   </div>
 </div>
 </template>

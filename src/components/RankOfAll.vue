@@ -14,8 +14,9 @@
 </template>
 
 <script setup>
+import apiAuth from "@/apis/testApi";
 import { useRouter } from "vue-router";
-import { reactive,toRefs } from "vue";
+import { reactive,toRefs, onMounted } from "vue";
 
 const state = reactive({
     data : [
@@ -32,8 +33,13 @@ const state = reactive({
 
     ]
 })
-
+onMounted(async() => {
+testApi();
+})
 const router = useRouter();
+  const testApi = async() => {
+  const result = await apiAuth.getTestUrl();
+}
 const toAll = () => {
     router.push({path:"/all"});
 }

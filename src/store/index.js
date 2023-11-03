@@ -4,9 +4,9 @@ export default createStore({
     userId: "",
     authToken: "",
     JoinPopState : false,
-    LoginPopState : false,
+    LoginPopState: false,
+    EditPopState : false,
   },
   modules: {
   }
 })
- 

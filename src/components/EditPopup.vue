@@ -3,15 +3,11 @@
       <div class="modal-wrapper">
         <div class="modal-container" :style="$attrs.style">
           <div class="modal-header">
-            <slot name="header">회원가입</slot>
+            <slot name="header">회원정보 수정</slot>
           </div>
 
           <div class="modal-body">
             <div class="card-body">
-              <div class="form-group">
-                <label class="form-label">User ID</label>
-                <input type="text" class="form-control" v-model="user.id"/>
-              </div>
               <div class="form-group">
                 <label class="form-label">User Name</label>
                 <input type="text" class="form-control" v-model="user.name"/>
@@ -29,7 +25,7 @@
 
           <div class="modal-footer">
             <slot name="footer">
-              <button class="btn btn-info btn-sm" @click="handleJoin()">가입</button>
+              <button class="btn btn-info btn-sm" @click="handleEdit()">수정</button>
               <button class="modal-default-button" @click="store.state.JoinPopState = false">취소</button>
             </slot>
           </div>
@@ -48,12 +44,12 @@ import apiAuth from "@/apis/auth";
 const store = useStore();
 const user = reactive({
     id:"user",
-    password:"12345",
     name:"사용자",
+    password:"12345",
     email:"user1@osstem.com"
 })
 
-async function handleJoin(){
+async function handleEdit(){
     const result = await apiAuth.join(user);
     console.log(result);
     store.state.JoinPopState = false
