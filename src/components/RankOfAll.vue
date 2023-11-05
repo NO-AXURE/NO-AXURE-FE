@@ -4,7 +4,17 @@
     <div class="img-container">
         <div class="img-box" :key="item" v-for="(item) in data">
             <img :src="`/assets/${item.no}.jpeg`" @click="toDetail()"/>
-            <p>{{item.title}}</p>
+            <div class="box-box">
+              <p>{{item.title}}</p>
+              <div class="star-ratings">
+                <div class="star-ratings-fill space-x-2 text-lg" :style="{ width: ratingToPercent + '%' }">
+                  <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                </div>
+                <div class="star-ratings-base space-x-2 text-lg">
+                  <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                </div>
+              </div>
+            </div>
             <div class="overlay" @click="toDetail()">
                 <div class="detail">영화 요약정보</div>
             </div>
@@ -66,6 +76,36 @@ const { data } = toRefs(state);
 }
 p {
     color:white;
+}
+.box-box {
+  display :flex;
+}
+.star-ratings {
+  color: #aaa9a9; 
+  position: relative;
+  unicode-bidi: bidi-override;
+  width: max-content;
+  -webkit-text-fill-color: transparent; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: 1.3px;
+  -webkit-text-stroke-color: #2b2a29;
+  margin-top :15px;
+}
+ 
+.star-ratings-fill {
+  color: #fff58c;
+  padding: 0;
+  position: absolute;
+  z-index: 1;
+  display: flex;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  -webkit-text-fill-color: gold;
+}
+ 
+.star-ratings-base {
+  z-index: 0;
+  padding: 0;
 }
 img {
   width:100%;
