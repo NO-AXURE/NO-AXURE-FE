@@ -8,7 +8,7 @@
             <div class="box-box">
               <h4 class="img-no">{{ item.no }}. {{ item.title }}</h4>
               <div class="star-ratings">
-                <div class="star-ratings-fill space-x-2 text-lg" :style="{ width: ratingToPercent + '%' }">
+                <div class="star-ratings-fill space-x-2 text-lg">
                   <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
                 </div>
                 <div class="star-ratings-base space-x-2 text-lg">
@@ -16,7 +16,7 @@
                 </div>
               </div>
             </div>
-            <img @click="toDetail()" :src="`/assets/${item.no}.jpeg`"/>
+            <img id="image" @click="toDetail()" src=""/>
             <div class="overlay" @click="toDetail()">
               <div class="detail">영화 요약정보</div>
             </div>
@@ -35,8 +35,12 @@
 import 'vue3-carousel/dist/carousel.css'
 import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
 import { useRouter } from "vue-router";
-import { reactive,toRefs } from 'vue';
+import { reactive,toRefs,ref,onMounted } from 'vue';
 import boardApi from "@/apis/board.js"
+
+onMounted(async() => {
+  getContentBoardMain();
+})
 const router = useRouter();
 
 const toToday = () => {
@@ -45,7 +49,7 @@ const toToday = () => {
 const toDetail = () => {
     router.push({path:"/detail"});
 }
-
+const battach = ref(null);
 const state = reactive({
     data : [
         {"no":1,"title":"화란","src":"@/assets/1.jpeg","actor":"", "detail":""},
@@ -59,16 +63,18 @@ const state = reactive({
     ]
 })
 
-const { data } = toRefs(state);
-
 async function getContentBoardMain(){
-  
-const boardDbData = await boardApi.getContentBoardMain();
-
+  const boardDbData = await boardApi.getContentBoardMain();
+  const blob = new Blob([new ArrayBuffer(boardDbData.data[0].boardDetailImage)], { type: "application/json" });
+  battach.value = URL.createObjectURL(blob);
+  console.log(battach.value)
+  let Image = document.getElementById("image")
+  Image.src = battach.value
 return boardDbData;
 }
 
-const boardData = getContentBoardMain();
+const { data } = toRefs(state);
+
 </script>
 
 <style scoped>

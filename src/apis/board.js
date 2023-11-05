@@ -1,10 +1,9 @@
 import axios from "axios"
 
 async function getContentBoardMain(){
-    let response = null;
-    response = await axios.get("/api/contentboard/contentboardmain", {});
-    console.log(response)
-        return { result: "success", data: response.data};
+    
+    const { data } = await axios.get("/api/contentboard/contentboardmain", {});
+    return { data: data.data }
     }
 export default {
   getContentBoardMain,

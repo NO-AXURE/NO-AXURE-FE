@@ -1,7 +1,7 @@
 // 컨텐츠 상세 화면
 <template>
     <div class="container">
-        <img :src="require(`@/assets/${data.no}.jpeg`)"/>
+        <img :src="(`@/assets/${data.no}.jpeg`)"/>
         <p>{{data.title}}</p>
         <div class="detail-info">
             <p>상세정보: {{data.detail}}</p>

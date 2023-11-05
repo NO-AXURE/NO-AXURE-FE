@@ -7,7 +7,7 @@
             <div class="box-box">
               <p>{{item.title}}</p>
               <div class="star-ratings">
-                <div class="star-ratings-fill space-x-2 text-lg" :style="{ width: ratingToPercent + '%' }">
+                <div class="star-ratings-fill space-x-2 text-lg">
                   <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
                 </div>
                 <div class="star-ratings-base space-x-2 text-lg">
@@ -44,12 +44,9 @@ const state = reactive({
     ]
 })
 onMounted(async() => {
-testApi();
+
 })
 const router = useRouter();
-  const testApi = async() => {
-  const result = await apiAuth.getTestUrl();
-}
 const toAll = () => {
     router.push({path:"/all"});
 }
