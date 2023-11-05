@@ -33,4 +33,5 @@ async function edit(user){
 export default {
     join,
     login,
+    edit
 }
