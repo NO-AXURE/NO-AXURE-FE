@@ -36,7 +36,7 @@ import 'vue3-carousel/dist/carousel.css'
 import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
 import { useRouter } from "vue-router";
 import { reactive,toRefs } from 'vue';
-
+import boardApi from "@/apis/board.js"
 const router = useRouter();
 
 const toToday = () => {
@@ -61,6 +61,14 @@ const state = reactive({
 
 const { data } = toRefs(state);
 
+async function getContentBoardMain(){
+  
+const boardDbData = await boardApi.getContentBoardMain();
+
+return boardDbData;
+}
+
+const boardData = getContentBoardMain();
 </script>
 
 <style scoped>
