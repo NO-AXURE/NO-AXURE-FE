@@ -1,6 +1,11 @@
 <template>
   <div class="container">
     <h2 class="title" @click="toAll()">전체 랭킹 ></h2>
+    <div>
+      <h1 style="color:white">asdasd</h1>
+      <img id="image" @click="toDetail()" :src="battach"/>
+      <button  @click="showimage">버튼</button>
+    </div>
     <div class="img-container">
         <div class="img-box" :key="item" v-for="(item) in data">
             <img :src="`/assets/${item.no}.jpeg`" @click="toDetail()"/>
@@ -26,7 +31,8 @@
 <script setup>
 import apiAuth from "@/apis/testApi";
 import { useRouter } from "vue-router";
-import { reactive,toRefs, onMounted } from "vue";
+import { reactive,toRefs, onMounted, ref } from "vue";
+import boardApi from "@/apis/board.js"
 
 const state = reactive({
     data : [
@@ -44,7 +50,6 @@ const state = reactive({
     ]
 })
 onMounted(async() => {
-
 })
 const router = useRouter();
 const toAll = () => {
@@ -55,6 +60,21 @@ const toDetail = () => {
 }
 
 const { data } = toRefs(state);
+
+const battach = ref(null);
+
+async function getContentBoardMain(){
+  const boardDbData = await boardApi.getContentBoardMain();
+  const blob = new Blob([boardDbData.data[0].boardDetailImage], { type: "image/jpg" });
+  battach.value = URL.createObjectURL(blob);
+  console.log(blob);
+  console.log(battach.value);
+return boardDbData;
+}
+
+function showimage(){
+  getContentBoardMain();
+}
 </script>
 <style scoped>
 .title{
