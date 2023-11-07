@@ -7,14 +7,14 @@
           <div class="img-box">
             <div class="box-box">
               <h4 class="img-no">{{ item.no }}. {{ item.contentNm }}</h4>
-              <div class="star-ratings">
+              <!-- <div class="star-ratings">
                 <div class="star-ratings-fill space-x-2 text-lg">
                   <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
                 </div>
                 <div class="star-ratings-base space-x-2 text-lg">
                   <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
                 </div>
-              </div>
+              </div> -->
             </div>
             <img id="image" @click="toDetail()" :src="`data:image/;base64,`+item.boardDetailImage"/>
             <div class="overlay" @click="toDetail()">

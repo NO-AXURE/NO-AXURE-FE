@@ -6,17 +6,17 @@
             <img id="image" @click="toDetail()" :src="`data:image/;base64,`+item.boardDetailImage"/>
             <div class="box-box">
               <p>{{item.contentNm}}</p>
-              <div class="star-ratings">
+              <!-- <div class="star-ratings">
                 <div class="star-ratings-fill space-x-2 text-lg">
                   <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
                 </div>
                 <div class="star-ratings-base space-x-2 text-lg">
                   <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
                 </div>
-              </div>
+              </div> -->
             </div>
             <div class="overlay" @click="toDetail()">
-                <div class="detail">영화 요약정보</div>
+                <div class="detail">{{item.boardDetailContent}}</div>
             </div>
         </div>
     </div>
@@ -47,6 +47,7 @@ const { data } = toRefs(state);
 
 async function getContentBoardMain(){
   const boardDbData = await boardApi.getContentBoardMain();
+  console.log(boardDbData.data)
   state.data = boardDbData.data;
 return boardDbData;
 }
@@ -117,7 +118,7 @@ img {
   background-color: white;
 }
 .img-box:hover .overlay {
-  opacity: 0.9;
+  opacity: 1;
 }
 
 .detail {
