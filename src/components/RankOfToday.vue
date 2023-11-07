@@ -6,7 +6,7 @@
         <slide class="slide" v-for="item in data" :key="item">
           <div class="img-box">
             <div class="box-box">
-              <h4 class="img-no">{{ item.no }}. {{ item.title }}</h4>
+              <h4 class="img-no">{{ item.no }}. {{ item.contentNm }}</h4>
               <div class="star-ratings">
                 <div class="star-ratings-fill space-x-2 text-lg">
                   <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
@@ -16,7 +16,7 @@
                 </div>
               </div>
             </div>
-            <img id="image" @click="toDetail()" src=""/>
+            <img id="image" @click="toDetail()" :src="`data:image/;base64,`+item.boardDetailImage"/>
             <div class="overlay" @click="toDetail()">
               <div class="detail">영화 요약정보</div>
             </div>
@@ -51,25 +51,12 @@ const toDetail = () => {
 }
 const battach = ref(null);
 const state = reactive({
-    data : [
-        {"no":1,"title":"화란","src":"@/assets/1.jpeg","actor":"", "detail":""},
-        {"no":2,"title":"1947 보스톤","src":"@/assets/2.jpeg","actor":"", "detail":""},
-        {"no":3,"title":"크리에이터","src":"@/assets/3.jpeg","actor":"", "detail":""},
-        {"no":4,"title":"더넌","src":"@/assets/4.jpeg","actor":"", "detail":""},
-        {"no":5,"title":"거미집","src":"@/assets/5.jpeg","actor":"", "detail":""},
-        {"no":6,"title":"화란","src":"@/assets/6.jpeg","actor":"", "detail":""},
-        {"no":7,"title":"천박사","src":"@/assets/7.jpeg","actor":"", "detail":""}
-
-    ]
+    data : []
 })
 
 async function getContentBoardMain(){
   const boardDbData = await boardApi.getContentBoardMain();
-  const blob = new Blob([new ArrayBuffer(boardDbData.data[0].boardDetailImage)], { type: "application/json" });
-  battach.value = URL.createObjectURL(blob);
-  console.log(battach.value)
-  let Image = document.getElementById("image")
-  Image.src = battach.value
+  state.data = boardDbData.data;
 return boardDbData;
 }
 
@@ -95,7 +82,7 @@ const { data } = toRefs(state);
   display :flex;
 }
 .star-ratings {
-  color: #aaa9a9; 
+  color: #aaa9a9;
   position: relative;
   unicode-bidi: bidi-override;
   width: max-content;
@@ -104,7 +91,7 @@ const { data } = toRefs(state);
   -webkit-text-stroke-color: #2b2a29;
   margin-top :20px;
 }
- 
+
 .star-ratings-fill {
   color: #fff58c;
   padding: 0;
@@ -116,7 +103,7 @@ const { data } = toRefs(state);
   overflow: hidden;
   -webkit-text-fill-color: gold;
 }
- 
+
 .star-ratings-base {
   z-index: 0;
   padding: 0;
